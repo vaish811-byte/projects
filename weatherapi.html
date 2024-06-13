@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            text-align: center;
+            align-items: center;
+           
+           
+        }
+        .first
+        {
+            align-items: center;
+            text-align: center;
+           
+            margin:30px auto 500px;
+            height:350px;
+            width:500px;
+            background-color: aliceblue;
+            border-radius: 2rem;
+            padding: 15px;
+        }
+        .container
+        {
+            margin-top:40px;
+            display: flex;
+           
+        }
+        #inner
+        {
+display:flex;
+margin-right:0px;
+        }
+        
+        #one
+        {
+            border-radius: 5rem;
+            margin-right:10px;
+            margin-left:0px;
+            height:40px;
+            width:200px;
+            border-color: black;
+            text-align: center;
+        }
+        #weather
+        {
+            margin-right: 280px;
+        }
+        button{
+            background-color: blueviolet;
+            color: aqua;
+            border-radius: 5rem;
+            height:40px;
+            width:100px;
+        }
+        #h1
+        {
+           
+            margin-left: 80px;
+            margin-right: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="first">
+        <input type="search"placeholder="enter a  city"id="one">
+        <button onclick="get()">Search</button>
+        <div class="container">
+        <h1 id="h1">London</h1>
+        <h2 id="h2">☀️8°C</h2>
+    </div>
+   <div id="inner">   
+<p id="para">
+    Thursday 10:26</p>
+    <p>, moderate rain</p>
+</div>
+    
+<p id="weather">Humidity: <strong>87%</strong>, Wind: <strong>7.2km/h</strong>
+</p>
+<br>
+
+<p>This project was coded by <a href="">Vaishnavi Nigam </a> and is <a href=" ">on GitHub</a> and  <a href=" "> hosted on Netlify</a> </a></p>
+</div>
+</body>
+
+<script>
+
+   
+function date()
+{
+    let d=new Date();
+    let day=d.getDay();
+    let h=d.getHours();
+    let m=d.getMinutes();
+    let arr=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+    document.getElementById('para').innerHTML=arr[day]+" "+h+":"+m;
+}
+date();
+   
+    async function call(cityname)
+    {
+        let promise=await fetch(`https://api.shecodes.io/weather/v1/current?query=${cityname}&key=63931c24f44t8b7cb315af74o03a3082`);
+        return await promise.json();
+    }
+    async function get()
+    {
+        let str=document.getElementById("one").value;
+        document.getElementById("h1").innerText=str;
+        let response=await call(str);
+        console.log(response);
+        document.getElementById("h2").innerText= "☀️"+" "+response.temperature.current+"°C";
+      
+       
+       
+    }
+    
+
+</script>
+</html>
