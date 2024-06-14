@@ -152,9 +152,9 @@ border-radius: 12px;
    async  function call(cityname)
     {
         let promise=await fetch(`https://api.shecodes.io/weather/v1/current?query=${cityname}&key=63931c24f44t8b7cb315af74o03a3082`);
-//let img=await fetch(`http://shecodes-assets.s3.amazonaws.com/api/weather/icons/shower-rain-day.png`);
+
         return await promise.json();
-        //return await img.json();
+        
     }
     async function weather()
     {
@@ -165,7 +165,7 @@ border-radius: 12px;
         let response=await call(value);
         document.getElementById('img').innerHTML=`<img src="${response.condition.icon_url}" class="weather-app-icon" />`;
         
-        //document.getElementById('p').innerHTML=arr[day]+" "+full+","+response.condition.description;
+        
         document.getElementById('description').innerText=response.condition.description;
 
     
